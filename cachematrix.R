@@ -32,6 +32,8 @@
 ## 4. get the value of the inverse of the matrix
 
 makeCacheMatrix <- function(x = matrix()) {
+    ## x is the cached matrix
+    ## inverse is the inverse matrix of x
     inverse <- NULL
     set <- function(y) {
 	x <<- y
@@ -54,8 +56,15 @@ cacheSolve <- function(x, ...) {
     if (!is.null(inverse)) {
 	return(inverse)
     }
+    ## get the matrix cached in x
     data <- x$get()
+
+    ## compute its inverse, sending any additional arguments to solve() 
     inverse <- solve(data, ...)
+
+    ## store the inverse of the matrix in x
     x$setinverse(inverse)
+
+    ## return the inverse of x
     inverse
 }
